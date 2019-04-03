@@ -4,9 +4,19 @@ namespace Internship\Module\Controller;
 
 class Router implements \Magento\Framework\App\RouterInterface
 {
+    /**
+     * @var \Magento\Framework\App\ActionFactory
+     */
+    private $actionFactory;
 
-    protected $actionFactory;
-    protected $_response;
+    /**
+     * @var \Magento\Framework\App\ResponseInterface
+     */
+    private $_response;
+
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
     protected $_scopeConfig;
 
     public function __construct(
@@ -19,13 +29,22 @@ class Router implements \Magento\Framework\App\RouterInterface
         $this->_scopeConfig = $scopeConfig;
     }
 
+    /**
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return bool|\Magento\Framework\App\ActionInterface
+     */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {
-        $customerFrontendUrl = $this->_scopeConfig->getValue('customUrl/general/enter_url', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $customFrontendUrl = $this->
+                            _scopeConfig->
+                            getValue(
+                                'customUrl/general/enter_url',
+                                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                            );
 
         $identifier = trim($request->getPathInfo(), '/');
 
-        if(strcmp($identifier, $customerFrontendUrl) == 0) {
+        if(strcmp($identifier, $customFrontendUrl) == 0) {
             $request->setModuleName('customrouter')-> //module name
             setControllerName('front')-> //controller name
             setActionName('index');

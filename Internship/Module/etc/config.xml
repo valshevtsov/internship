@@ -3,7 +3,7 @@
     <default>
         <customUrl>
             <general>
-                <enter_url>customerUrl</enter_url>
+                <enter_url>customerurl</enter_url>
             </general>
         </customUrl>
     </default>
