@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add To Cart</title>
+</head>
+<body>
+<form action="" method="post">
+    <p>
+        <label for="sku">Product SKU</label>
+        <input id="sku" type="text" placeholder="Enter product SKU">
+        <label for="amount">Product amount</label>
+        <input id="amount" type="text" placeholder="Enter amount">
+        <button class="action tocart primary" type="submit" name="addToCart">Add To Cart</button>
+    </p>
+</form>
+<?php
+    $productCollection = $block->getProductCollection();
+    foreach ($productCollection as $product)
+    {
+//        print_r($product->getData());
+//        echo "<br>";
+        echo 'Name  =  '.$product->getName().'<br>';
+    }
+?>
+</body>
+</html>
