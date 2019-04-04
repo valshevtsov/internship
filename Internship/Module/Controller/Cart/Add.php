@@ -6,7 +6,7 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Setup\Exception;
 
-class AddToCart extends Action
+class Add extends Action
 {
 
     /**
@@ -58,9 +58,9 @@ class AddToCart extends Action
             $this->cart->addProduct($product, $params);
             $this->cart->save();
         } catch (NoSuchEntityException $exception) {
-            $this->messageManager->addExceptionMessage($exception, __('No such product in database'));
+            $this->messageManager->addExceptionMessage($exception, __('No such product in catalog'));
         } catch (\Exception $exception) {
-            $this->messageManager->addExceptionMessage($exception, __('Oops, something happened'));
+            $this->messageManager->addExceptionMessage($exception, __('Some error with adding to cart'));
         }
         return $this->_redirect($this->_redirect->getRefererUrl());
     }
