@@ -8,9 +8,8 @@ use Magento\Setup\Exception;
 
 class Add extends Action
 {
-
     /**
-     * @var Magento\Checkout\Model\Cart
+     * @var \Magento\Checkout\Model\Cart
      */
     private $cart;
 
@@ -37,31 +36,35 @@ class Add extends Action
     }
 
     /**
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
         $sku = $this->getRequest()->getParam('sku');
         $quantity = $this->getRequest()->getParam('quantity');
 
-        if (!($sku && $quantity)) {
-            $this->messageManager->addErrorMessage( __('Enter all values'));
-            return $this->_redirect($this->_redirect->getRefererUrl());
-        }
-
         try {
             $product = $this->productRepository->get($sku);
+
             $params = array(
                 'product' => $product->getId(),
                 'qty' => $quantity
             );
+
             $this->cart->addProduct($product, $params);
             $this->cart->save();
+
+            $this->messageManager->addSuccessMessage(
+                __('Product ' . $product->getName() .
+                    ' in quantity ' . $quantity .
+                    ' added to cart'));
+
         } catch (NoSuchEntityException $exception) {
             $this->messageManager->addExceptionMessage($exception, __('No such product in catalog'));
         } catch (\Exception $exception) {
             $this->messageManager->addExceptionMessage($exception, __('Some error with adding to cart'));
         }
+
         return $this->_redirect($this->_redirect->getRefererUrl());
     }
 

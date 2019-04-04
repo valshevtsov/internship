@@ -1,8 +1,16 @@
 <?php
 
+namespace Internship\Module\Model;
+
+use Magento\Catalog\Model\Product\Type;
+
 class ProductStorage extends \Magento\Framework\Model\AbstractModel
 {
     private $collectionFactory;
+
+    /**
+     * @var \Magento\CatalogInventory\Helper\Stock
+     */
     private $stockHelper;
 
     public function __construct(
@@ -15,12 +23,35 @@ class ProductStorage extends \Magento\Framework\Model\AbstractModel
         array $data = []
     ) {
         $this->stockHelper = $stockHelper;
-        $this->collectionFactory = $this->collectionFactory;
+        $this->collectionFactory = $collectionFactory;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
-    public function findbySku(string $query)
+    /**
+     * @param string $request
+     * @return array
+     */
+    public function findBySku(string $request)
     {
-        $productCollection = $this->collectionFactory
+        $productCollection = $this->collectionFactory->create();
+
+        $productCollection
+                        ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id'])
+                        ->addFieldToFilter('sku', ['like' => '%' . $request . '%'])
+                        ->addFieldToFilter('type_id', ['eq' => Type::TYPE_SIMPLE])
+                        ->setCurPage(1)
+                        ->setPageSize(12);
+
+        $this->stockHelper->addInStockFilterToCollection($productCollection);
+
+        $productCollection->load();
+
+        $response = [];
+
+        foreach($productCollection as $product) {
+            $response[$product->getSKU()] = $product->getName();
+        }
+
+        return $response;
     }
 }

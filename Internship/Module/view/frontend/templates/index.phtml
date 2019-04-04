@@ -15,13 +15,14 @@
     <form id="cart-form" action="<?= $block->getUrl('*/cart/add') ?>" >
         <p>
             <label for="sku">Product SKU</label>
-            <input name="sku" type="text" placeholder="Enter product SKU">
+            <input  id="sku" name="sku" type="text" placeholder="Enter product SKU" list="info" autocomplete="off" required/>
+            <datalist id="info">
+            </datalist>
             <label for="quantity">Product quantity</label>
-            <input name="quantity" type="text" placeholder="Enter quantity">
+            <input id="quantity" name="quantity" type="text" placeholder="Enter quantity" required/>
             <button class="action tocart primary" type="submit" name="addToCart">Add To Cart</button>
         </p>
     </form>
 </div>
 </body>
 </html>
-

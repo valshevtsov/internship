@@ -17,7 +17,7 @@ class Router implements \Magento\Framework\App\RouterInterface
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $_scopeConfig;
+    private $_scopeConfig;
 
     public function __construct(
         \Magento\Framework\App\ActionFactory $actionFactory,
@@ -51,6 +51,7 @@ class Router implements \Magento\Framework\App\RouterInterface
         } else {
             return false;
         }
+
         return $this->actionFactory->create(
             'Magento\Framework\App\Action\Forward',
             ['request' => $request]
