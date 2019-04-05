@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
     <system>
         <tab id="internship" translate="label" sortOrder="10">
             <label>Amasty</label>
@@ -9,10 +11,19 @@
             <label>URL settings</label>
             <tab>internship</tab>
             <resource>Internship_Module::internship_config</resource>
-            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                <field id="enter_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>General Configuration</label>
+                <field id="enter_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
                     <label>Custom Frontend Url</label>
                     <comment>Enter some url</comment>
+                </field>
+                <field id="discount" translate="label" sortOrder="2" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Discount quantity</label>
+
+                    <comment>Set discount quantity according to total price</comment>
                 </field>
             </group>
         </section>

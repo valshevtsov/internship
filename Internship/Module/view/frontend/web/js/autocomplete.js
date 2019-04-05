@@ -1,14 +1,14 @@
-require(['jquery'],function($){
-    $(document).ready(function(){
+require(['jquery'], function ($) {
+    $(document).ready(function () {
 
-        $('#sku').on('keyup', function(e){
+        $('#sku').on('keyup', function (e) {
 
             if (e.keyCode == undefined) {
                 return 0;
             }
             var typing = $(this).val();
 
-            if(typing.length > 2){
+            if (typing.length > 2) {
 
                 var cancel =
                     $.ajax({
@@ -16,17 +16,17 @@ require(['jquery'],function($){
                         type: 'post',
                         data: $('#cart-form').serialize(),
                         dataType: 'json',
-                        success: function(response){
+                        success: function (response) {
                             var get = response;
 
                             $('#info').empty();
 
-                            for(var propt in get){
-                                $('#info').append('<option value="'+ propt +'">' + get[propt] + '</option>')
+                            for (var propt in get) {
+                                $('#info').append('<option value="' + propt + '">' + get[propt] + '</option>')
                             }
                         },
                         complete: function () {
-                            if(cancel) {
+                            if (cancel) {
                                 cancel.abort();
                             }
                         }

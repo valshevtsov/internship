@@ -6,6 +6,9 @@ use Magento\Catalog\Model\Product\Type;
 
 class ProductStorage extends \Magento\Framework\Model\AbstractModel
 {
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+     */
     private $collectionFactory;
 
     /**
@@ -36,11 +39,11 @@ class ProductStorage extends \Magento\Framework\Model\AbstractModel
         $productCollection = $this->collectionFactory->create();
 
         $productCollection
-                        ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id'])
-                        ->addFieldToFilter('sku', ['like' => '%' . $request . '%'])
-                        ->addFieldToFilter('type_id', ['eq' => Type::TYPE_SIMPLE])
-                        ->setCurPage(1)
-                        ->setPageSize(12);
+            ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id'])
+            ->addFieldToFilter('sku', ['like' => '%' . $request . '%'])
+            ->addFieldToFilter('type_id', ['eq' => Type::TYPE_SIMPLE])
+            ->setCurPage(1)
+            ->setPageSize(12);
 
         $this->stockHelper->addInStockFilterToCollection($productCollection);
 
@@ -48,7 +51,7 @@ class ProductStorage extends \Magento\Framework\Model\AbstractModel
 
         $response = [];
 
-        foreach($productCollection as $product) {
+        foreach ($productCollection as $product) {
             $response[$product->getSKU()] = $product->getName();
         }
 
