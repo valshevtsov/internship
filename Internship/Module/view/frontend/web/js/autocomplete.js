@@ -8,12 +8,7 @@ require(['jquery'],function($){
             }
             var typing = $(this).val();
 
-            var cancel = null;
             if(typing.length > 2){
-
-                if(cancel) {
-                    cancel.abort();
-                }
 
                 var cancel =
                     $.ajax({
@@ -24,10 +19,17 @@ require(['jquery'],function($){
                         success: function(response){
                             var get = response;
 
+                            $('#info').empty();
+
                             for(var propt in get){
                                 $('#info').append('<option value="'+ propt +'">' + get[propt] + '</option>')
                             }
                         },
+                        complete: function () {
+                            if(cancel) {
+                                cancel.abort();
+                            }
+                        }
                     })
             } else {
                 $('#info').empty();

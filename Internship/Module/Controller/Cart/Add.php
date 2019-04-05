@@ -28,7 +28,8 @@ class Add extends Action
         \Magento\Checkout\Model\Cart $cart,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    ) {
+    )
+    {
         $this->cart = $cart;
         $this->productRepository = $productRepository;
         $this->scopeConfig = $scopeConfig;
