@@ -3,6 +3,7 @@
 namespace Internship\Module\Controller\Cart;
 
 use Magento\Framework\App\Action\Action;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Setup\Exception;
 
@@ -62,8 +63,12 @@ class Add extends Action
 
         } catch (NoSuchEntityException $exception) {
             $this->messageManager->addExceptionMessage($exception, __('No such product in catalog'));
+        } catch (LocalizedException $exception) {
+            $this->messageManager->addExceptionMessage(
+                $exception, __('Product quantity is too big, enter less')
+            );
         } catch (\Exception $exception) {
-            $this->messageManager->addExceptionMessage($exception, __('Some error with adding to cart'));
+            $this->messageManager->addErrorMessage($exception, __('Some error with adding to cart'));
         }
 
         return $this->_redirect($this->_redirect->getRefererUrl());

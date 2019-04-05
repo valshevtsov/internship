@@ -1,7 +1,7 @@
 require(['jquery'],function($){
     $(document).ready(function(){
 
-        $("#sku").on('keyup', function(e){
+        $('#sku').on('keyup', function(e){
 
             if (e.keyCode == undefined) {
                 return 0;
