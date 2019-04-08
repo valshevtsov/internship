@@ -6,6 +6,7 @@ require(['jquery'], function ($) {
             if (e.keyCode == undefined) {
                 return 0;
             }
+
             var typing = $(this).val();
 
             if (typing.length > 2) {
