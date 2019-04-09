@@ -1,0 +1,21 @@
+.form-data{
+    display: flex;
+    flex-direction: row;
+    justidy-content: flex-start;
+    align-items: center;
+    margin: 0px 0px 10px
+}
+
+#sku {
+    width: 50%;
+    margin-left: 37px;
+}
+
+#quantity {
+    width: 50%;
+    margin-left: 10px;
+}
+
+button#add, button#reset {
+    margin: 5px -70px 0px 120px;
+}

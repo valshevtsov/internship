@@ -10,17 +10,24 @@
 
         <input type="hidden" name="myController" value="1">
 
-        <label for="sku">Product SKU</label>
-        <input id="sku" name="sku" type="text" placeholder="Enter product SKU"
-               list="info" autocomplete="off" required/>
+        <div class="form-data">
+            <label for="sku">Product SKU</label>
+            <input id="sku" name="sku" type="text" placeholder="Enter product SKU"
+                   list="info" autocomplete="off" required/>
+        </div>
 
         <datalist id="info">
         </datalist>
 
-        <label for="quantity">Product quantity</label>
-        <input id="quantity" name="quantity" type="text" placeholder="Enter quantity" required/>
+        <div class="form-data">
+            <label for="quantity">Product quantity</label>
+            <input id="quantity" name="quantity" type="text" placeholder="Enter quantity" required/>
+        </div>
 
-        <button class="action tocart primary" type="submit" name="addToCart">Add To Cart</button>
+        <div class="form-data">
+            <button class="action tocart primary" id="add" type="submit" name="addToCart">Add To Cart</button>
+            <button class="action tocart primary" id="reset" type="reset" name="clearValues">Reset</button>
+        </div>
     </form>
 </div>
 </body>

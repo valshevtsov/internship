@@ -72,5 +72,4 @@ class Add extends Action
 
         return $this->_redirect($this->_redirect->getRefererUrl());
     }
-
 }
