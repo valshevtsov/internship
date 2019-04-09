@@ -7,4 +7,10 @@
         <plugin name="Internship_Module_Plugin" type="Internship\Module\Plugin\AddToCart" sortOrder="10"
                 disabled="false"/>
     </type>
+
+    <type name="Magento\SalesRule\Model\Quote\Discount">
+        <plugin name="Internship_Module_Plugin_Discount" type="Internship\Module\Plugin\CountWithDiscount"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>

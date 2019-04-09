@@ -8,6 +8,8 @@
     <form id="cart-form" action="checkout/cart/add">
         <?php echo $block->getBlockHtml('formkey') ?>
 
+        <input type="hidden" name="myController" value="1">
+
         <label for="sku">Product SKU</label>
         <input id="sku" name="sku" type="text" placeholder="Enter product SKU"
                list="info" autocomplete="off" required/>
