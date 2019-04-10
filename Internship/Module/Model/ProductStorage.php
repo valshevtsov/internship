@@ -39,9 +39,10 @@ class ProductStorage extends \Magento\Framework\Model\AbstractModel
         $productCollection = $this->collectionFactory->create();
 
         $productCollection
-            ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id'])
+            ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id', 'wholesale'])
             ->addFieldToFilter('sku', ['like' => '%' . $request . '%'])
             ->addFieldToFilter('type_id', ['eq' => Type::TYPE_SIMPLE])
+            ->addFieldToFilter('wholesale', ['eq' => 1])
             ->setCurPage(1)
             ->setPageSize(12);
 

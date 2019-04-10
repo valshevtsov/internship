@@ -38,16 +38,19 @@ class AddToCart
             try {
                 $params = $catcher->getRequest()->getParams();
                 $product = $this->productRepository->get($params['sku']);
-                $catcher->getRequest()->setParams([
-                    'product' => $product->getId(),
-                    'qty' => $params['quantity'],
-                ]);
+                if ($product->getCustomAttribute('wholesale')) {
+                    $catcher->getRequest()->setParams([
+                        'product' => $product->getId(),
+                        'qty' => $params['quantity'],
+                    ]);
+                } else {
+                    $this->messageManager->addErrorMessage(__('This product isn\'t wholesale, refusal in adding'));
+                }
             } catch (NoSuchEntityException $exception) {
                 $this->messageManager->addErrorMessage($exception->getMessage());
             } catch (\Exception $exception) {
                 $this->messageManager->addErrorMessage($exception->getMessage());
             }
         }
-
     }
 }
