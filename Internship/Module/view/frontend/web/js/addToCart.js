@@ -18,9 +18,9 @@ require(['jquery', 'Magento_Customer/js/customer-data'], function ($, customerDa
                     dataType: 'json',
                     success: function (response) {
                         /* Minicart reloading */
-                        customerData.reload('cart', true);
+                        customerData.reload(['cart'], true);
                         if (response.length != 0) {
-                            customerData.reload('messages', true);
+                            customerData.reload(['messages'], true);
                         } else {
                             $('#info').empty();
                             $('#sku').val('');
