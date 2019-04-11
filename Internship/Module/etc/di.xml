@@ -13,4 +13,10 @@
                 sortOrder="10"
                 disabled="false"/>
     </type>
+
+    <type name="Magento\SalesRule\Model\Quote\Discount">
+        <plugin name="Internship_Module_Plugin_Discount_NewPrice" type="Internship\Module\Plugin\Repricing"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>

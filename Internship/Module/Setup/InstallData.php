@@ -10,6 +10,9 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 
 class InstallData implements InstallDataInterface
 {
+    /**
+     * @var EavSetupFactory
+     */
     private $eavSetupFactory;
 
     public function __construct(EavSetupFactory $eavSetupFactory)
@@ -51,16 +54,52 @@ class InstallData implements InstallDataInterface
                 'apply_to' => 'simple',
             ]
         );
+
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'wholesale_price',
+            [
+                'type' => 'text',
+                'backend' => '',
+                'frontend' => '',
+                'label' => 'Wholesale Price',
+                'input' => 'price',
+                'class' => '',
+                'source' => '',
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
+                'visible' => true,
+                'required' => false,
+                'user_defined' => false,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'filterable_in_search' => false,
+                'used_in_product_listing' => true,
+                'unique' => false,
+                'is_used_in_grid' => true,
+                'is_visible_in_grid' => true,
+                'apply_to' => 'simple',
+            ]
+        );
     }
 
-    /**
-     * function for deleting custom attribute
-     */
+//    /**
+//     * function for deleting custom attributes (wholesale and wholesale_price)
+//     * @param ModuleDataSetupInterface $setup
+//     * @param ModuleContextInterface $context
+//     */
 //    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
 //    {
 //        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+//
 //        $eavSetup->removeAttribute(
 //            \Magento\Catalog\Model\Product::ENTITY,
 //            'wholesale');
+//
+//        $eavSetup->removeAttribute(
+//            \Magento\Catalog\Model\Product::ENTITY,
+//            'wholesale_price');
 //    }
 }

@@ -39,7 +39,7 @@ class ProductStorage extends \Magento\Framework\Model\AbstractModel
         $productCollection = $this->collectionFactory->create();
 
         $productCollection
-            ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id', 'wholesale'])
+            ->addAttributeToSelect(['sku', 'name', 'qty', 'type_id', 'wholesale', 'wholesale_price'])
             ->addFieldToFilter('sku', ['like' => '%' . $request . '%'])
             ->addFieldToFilter('type_id', ['eq' => Type::TYPE_SIMPLE])
             ->addFieldToFilter('wholesale', ['eq' => 1])

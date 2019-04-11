@@ -34,17 +34,24 @@ class CountWithDiscount extends \Magento\Quote\Model\Quote\Address\Total\Abstrac
      */
     private $scopeConfig;
 
+    /**
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    private $productRepository;
+
     public function __construct(
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\SalesRule\Model\Validator $validator,
         \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency,
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->eventManager = $eventManager;
         $this->storeManager = $storeManager;
         $this->calculator = $validator;
         $this->priceCurrency = $priceCurrency;
+        $this->productRepository = $productRepository;
         $this->scopeConfig = $scopeConfig;
 
     }
@@ -85,7 +92,7 @@ class CountWithDiscount extends \Magento\Quote\Model\Quote\Address\Total\Abstrac
 
     public function getDiscountByTotalOrder(\Magento\Quote\Model\Quote $quote)
     {
-        $baseSubtotal = $quote->getBaseSubtotal();
+        $baseSubtotal = $this->total->getData('base_subtotal');
 
         $serializedFrontendModelDiscounts = $this
             ->scopeConfig
