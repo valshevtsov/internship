@@ -92,8 +92,7 @@ class CountWithDiscount extends \Magento\Quote\Model\Quote\Address\Total\Abstrac
 
     public function getDiscountByTotalOrder(\Magento\Quote\Model\Quote $quote)
     {
-        $baseSubtotal = $this->total->getData('base_subtotal');
-
+        $baseSubtotal = $quote->getBaseSubtotal();
         $serializedFrontendModelDiscounts = $this
             ->scopeConfig
             ->getValue(
