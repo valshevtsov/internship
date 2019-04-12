@@ -29,8 +29,7 @@ class Repricing extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
 
     public function setNewPrices(\Magento\Quote\Model\Quote $quote)
     {
-        $wholesaleDiscount = 0;
-        $items = $quote->getItems();
+        $items = $quote->getAllItems();
         foreach ($items as $item) {
             $product = $this->productRepository->get($item['sku']);
             $search = $product->getCustomAttribute('wholesale');
