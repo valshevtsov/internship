@@ -2,19 +2,15 @@
 
 namespace Internship\Module\Controller\Front;
 
-class Index extends \Magento\Framework\App\Action\Action {
+use Magento\Framework\Controller\ResultFactory;
 
-    protected $_pageFactory;
-
-    public function __construct(\Magento\Framework\App\Action\Context $context,
-                                \Magento\Framework\View\Result\PageFactory $pageFactory)
-    {
-        $this->_pageFactory = $pageFactory;
-        return parent::__construct($context);
-    }
-
+class Index extends \Magento\Framework\App\Action\Action
+{
     public function execute()
     {
-        return $this->_pageFactory->create();
+        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+
+        return $resultPage;
     }
 }
